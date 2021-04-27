@@ -1,0 +1,13 @@
+import pandas as pd
+import numpy as np
+
+import glob, os, sys
+
+df = glob.glob(os.path.join('/CommClusters/data/corpora/byCountry/', '*.csv'))
+df = {i[37:-4]:i for i in df}
+d = []
+for k,v in df.items():
+    dd = pd.read_csv(v)
+    dd['country'] = k
+    d.append(dd)
+df = pd.concat(d, ignore_index=True)
